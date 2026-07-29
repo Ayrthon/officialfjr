@@ -37,7 +37,9 @@ import Icon from './Icon.astro';
 <style>
   .hero {
     position: relative;
-    min-height: 100dvh;
+    /* Slightly less than full viewport so the Trusted By ticker below is
+       visible on first load — creates an implicit "scroll for more" cue. */
+    min-height: min(85dvh, 820px);
     padding-top: var(--header-h);
     display: flex;
     align-items: flex-end;
@@ -93,13 +95,13 @@ import Icon from './Icon.astro';
   .hero__inner {
     position: relative;
     z-index: 1;
-    padding-block: 3rem 5rem;
+    padding-block: 3rem 3rem;
     width: 100%;
   }
 
   @media (min-width: 1024px) {
     .hero__inner {
-      padding-block: 4rem 6rem;
+      padding-block: 4rem 4rem;
     }
   }
 
