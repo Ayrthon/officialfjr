@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<Layout
+  title="Thank you — FJR"
+  description="Your booking request has been received. FJR will be in touch within 48 hours."
+>
+  <section class="thanks">
+    <div class="container thanks__inner">
+      <span class="eyebrow">Message Received</span>
+      <h1 class="thanks__title">Thanks — we'll be in touch.</h1>
+      <p class="thanks__body">
+        Your booking request has been received. FJR (or the team) will get back
+        to you within <strong>48 hours</strong> with availability and pricing.
+      </p>
+      <p class="thanks__note">
+        In the meantime, follow along on
+        <a href="https://www.instagram.com/officialfjr" target="_blank" rel="noopener noreferrer">Instagram</a>
+        for the latest sets and highlights.
+      </p>
+
+      <a href="/" class="btn btn--outline thanks__cta">
+        <Icon name="arrow-right" size={16} class="btn__icon" />
+        Back to home
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .thanks {
+    min-height: calc(100dvh - var(--header-h));
+    display: flex;
+    align-items: center;
+    padding-top: var(--header-h);
+  }
+
+  .thanks__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 640px;
+    padding-block: 3rem;
+  }
+
+  .thanks__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--fg);
+  }
+
+  .thanks__body {
+    color: var(--fg-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .thanks__body strong {
+    color: var(--fg);
+  }
+
+  .thanks__note {
+    color: var(--fg-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .thanks__note a {
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 1px;
+  }
+
+  .thanks__cta {
+    align-self: flex-start;
+    margin-top: 1rem;
+  }
+</style>

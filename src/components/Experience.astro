@@ -1,0 +1,104 @@
+---
+import Placeholder from './Placeholder.astro';
+
+const experiences = [
+  { title: 'Festivals',        subtitle: 'Worldwide' },
+  { title: 'Clubs',            subtitle: 'Netherlands' },
+  { title: 'Corporate Events', subtitle: 'International' },
+  { title: 'Private Events',   subtitle: 'Weddings & Parties' },
+  { title: 'Asia',             subtitle: 'Various Countries' },
+  { title: 'United Kingdom',   subtitle: 'London & Beyond' },
+];
+---
+
+<section id="experience" class="experience section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Experience</span>
+      <h2 class="section-title">Where FJR performs.</h2>
+      <p class="section-lead">
+        From packed festival tents to intimate private celebrations —
+        every stage, every crowd, every continent.
+      </p>
+    </div>
+
+    <ul class="experience__grid reveal">
+      {experiences.map((e) => (
+        <li class="experience-card">
+          <div class="experience-card__media">
+            <Placeholder aspect="4/3" label={`${e.title} — photo`} />
+          </div>
+          <div class="experience-card__body">
+            <h3 class="experience-card__title">{e.title}</h3>
+            <p class="experience-card__subtitle">{e.subtitle}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .experience__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .experience__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .experience__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .experience-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.25s var(--ease-out-expo),
+      transform 0.25s var(--ease-out-expo);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .experience-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .experience-card__media {
+    position: relative;
+  }
+
+  .experience-card__body {
+    padding: 1rem 1.15rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .experience-card__title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--fg);
+  }
+
+  .experience-card__subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: var(--fg-muted);
+  }
+</style>

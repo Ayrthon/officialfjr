@@ -1,0 +1,98 @@
+---
+import Icon from './Icon.astro';
+
+const testimonials = [
+  {
+    quote:
+      'FJR brought insane energy and kept the crowd moving perfectly. The dancefloor was full all night.',
+    author: 'Samsung Event Team',
+  },
+  {
+    quote:
+      'Professional, on time and delivered an unforgettable experience for our guests. Highly recommended.',
+    author: 'Loungefest',
+  },
+  {
+    quote:
+      "One of the best DJs we've worked with. Versatile, talented and a true crowd reader.",
+    author: 'Private Client',
+  },
+];
+---
+
+<section id="testimonials" class="testimonials section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Testimonials</span>
+      <h2 class="section-title">What clients say.</h2>
+    </div>
+
+    <ul class="testimonials__grid reveal">
+      {testimonials.map((t) => (
+        <li class="testimonial-card">
+          <div class="testimonial-card__stars" aria-label="5 out of 5 stars">
+            {Array.from({ length: 5 }).map(() => (
+              <Icon name="star" size={14} />
+            ))}
+          </div>
+          <blockquote class="testimonial-card__quote">"{t.quote}"</blockquote>
+          <cite class="testimonial-card__author">— {t.author}</cite>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .testimonials__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .testimonials__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+  }
+
+  .testimonial-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: border-color 0.25s var(--ease-out-expo);
+  }
+
+  .testimonial-card:hover {
+    border-color: var(--accent);
+  }
+
+  .testimonial-card__stars {
+    display: inline-flex;
+    gap: 0.15rem;
+    color: var(--accent);
+  }
+
+  .testimonial-card__quote {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--fg);
+    font-style: normal;
+    flex: 1;
+  }
+
+  .testimonial-card__author {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--fg-muted);
+    font-style: normal;
+  }
+</style>

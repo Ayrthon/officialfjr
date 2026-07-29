@@ -1,0 +1,90 @@
+---
+const brands = [
+  { name: 'ADE',            label: 'ADE' },
+  { name: 'Exchange Asia',  label: 'Exchange\nAsia' },
+  { name: 'Samsung',        label: 'SAMSUNG' },
+  { name: 'Loungefest',     label: 'Loungefest' },
+  { name: 'Bar Twenty Two', label: 'B A R\nTWENTY TWO' },
+  { name: 'R',              label: 'R' },
+];
+---
+
+<section class="trusted section--tight">
+  <div class="container trusted__inner">
+    <span class="trusted__label">Trusted By</span>
+    <ul class="trusted__list">
+      {brands.map((b) => (
+        <li class="trusted__item" title={b.name}>
+          <span class="trusted__brand">{b.label}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .trusted {
+    border-block: 1px solid var(--border);
+    background: #080808;
+  }
+
+  .trusted__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .trusted__inner {
+      flex-direction: row;
+      gap: 2.5rem;
+    }
+  }
+
+  .trusted__label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    flex-shrink: 0;
+  }
+
+  .trusted__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.75rem 2.5rem;
+    flex: 1;
+  }
+
+  @media (min-width: 640px) {
+    .trusted__list {
+      gap: 2rem 3rem;
+    }
+  }
+
+  .trusted__item {
+    color: var(--fg-muted);
+    transition: color 0.25s var(--ease-out-expo);
+  }
+
+  .trusted__item:hover {
+    color: var(--fg);
+  }
+
+  .trusted__brand {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: pre-line;
+    text-align: center;
+    line-height: 1.05;
+    display: inline-block;
+  }
+</style>

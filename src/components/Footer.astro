@@ -1,0 +1,214 @@
+---
+import Icon from './Icon.astro';
+
+const year = new Date().getFullYear();
+
+const quickLinks = [
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'Videos', href: '#videos' },
+  { label: 'Presskit', href: '#presskit' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const socials: { label: string; href: string; icon: 'instagram' | 'tiktok' | 'youtube' | 'spotify' | 'soundcloud' | 'linkedin' }[] = [
+  { label: 'Instagram', href: 'https://www.instagram.com/officialfjr', icon: 'instagram' },
+  { label: 'TikTok',    href: '#',                                       icon: 'tiktok' },
+  { label: 'YouTube',   href: '#',                                       icon: 'youtube' },
+  { label: 'Spotify',   href: '#',                                       icon: 'spotify' },
+  { label: 'SoundCloud',href: '#',                                       icon: 'soundcloud' },
+  { label: 'LinkedIn',  href: '#',                                       icon: 'linkedin' },
+];
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__col site-footer__brand">
+      <div class="site-footer__mark">FJR</div>
+      <p class="site-footer__tagline">Open Format DJ &amp; MC</p>
+      <p class="site-footer__blurb">Creating unforgettable dancefloors worldwide.</p>
+    </div>
+
+    <div class="site-footer__col">
+      <h3 class="site-footer__heading">Quick Links</h3>
+      <ul class="site-footer__list">
+        {quickLinks.map((l) => (
+          <li><a href={l.href}>{l.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="site-footer__col">
+      <h3 class="site-footer__heading">Follow FJR</h3>
+      <ul class="site-footer__socials">
+        {socials.map((s) => (
+          <li>
+            <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+              <Icon name={s.icon} size={18} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="site-footer__col">
+      <h3 class="site-footer__heading">Contact</h3>
+      <ul class="site-footer__list site-footer__contact">
+        <li>
+          <Icon name="mail" size={14} />
+          <a href="mailto:bookings@officialfjr.com">bookings@officialfjr.com</a>
+        </li>
+        <li>
+          <Icon name="phone" size={14} />
+          <a href="tel:+31612345678">+31 6 12345678</a>
+        </li>
+        <li>
+          <Icon name="pin" size={14} />
+          <span>The Netherlands</span>
+        </li>
+        <li>
+          <Icon name="globe" size={14} />
+          <span>Available Worldwide</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <p>© {year} Official FJR. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: #050505;
+    padding-block: 4rem 1.5rem;
+    color: var(--fg-muted);
+  }
+
+  .site-footer__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .site-footer__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .site-footer__inner {
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 3rem;
+    }
+  }
+
+  .site-footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .site-footer__mark {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2.25rem;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+    line-height: 1;
+  }
+
+  .site-footer__tagline {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .site-footer__blurb {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--fg-muted);
+    max-width: 24ch;
+  }
+
+  .site-footer__heading {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .site-footer__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .site-footer__list a {
+    color: var(--fg-muted);
+    font-size: 0.9rem;
+    transition: color 0.2s var(--ease-out-expo);
+  }
+
+  .site-footer__list a:hover {
+    color: var(--accent);
+  }
+
+  .site-footer__contact li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--fg-muted);
+    font-size: 0.9rem;
+  }
+
+  .site-footer__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    list-style: none;
+  }
+
+  .site-footer__socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    transition: border-color 0.2s var(--ease-out-expo),
+      background 0.2s var(--ease-out-expo),
+      color 0.2s var(--ease-out-expo);
+  }
+
+  .site-footer__socials a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .site-footer__bottom {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.1em;
+    color: var(--fg-dim);
+  }
+</style>

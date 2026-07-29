@@ -1,0 +1,334 @@
+---
+import Icon from './Icon.astro';
+
+const navLinks = [
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'Videos', href: '#videos' },
+  { label: 'Presskit', href: '#presskit' },
+  { label: 'Contact', href: '#contact' },
+];
+---
+
+<header class="site-header" data-header>
+  <div class="site-header__inner container">
+    <a href="#home" class="site-header__brand" aria-label="FJR — home">
+      <span class="site-header__brand-mark">FJR</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+        {navLinks.map((link) => (
+          <li>
+            <a href={link.href} class="site-nav__link">{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a href="#contact" class="btn btn--primary site-header__cta">Book Now</a>
+      <button
+        type="button"
+        class="site-header__toggle"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+      >
+        <Icon name="menu" size={22} />
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+    <div class="mobile-menu__inner container">
+      <button
+        type="button"
+        class="mobile-menu__close"
+        aria-label="Close menu"
+        data-menu-close
+      >
+        <Icon name="close" size={26} />
+      </button>
+      <nav aria-label="Mobile">
+        <ul class="mobile-menu__list">
+          {navLinks.map((link) => (
+            <li>
+              <a href={link.href} class="mobile-menu__link" data-menu-link>{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <a href="#contact" class="btn btn--primary mobile-menu__cta" data-menu-link>Book Now</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    height: var(--header-h);
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: background 0.25s var(--ease-out-expo),
+      border-color 0.25s var(--ease-out-expo);
+  }
+
+  .site-header.is-scrolled {
+    background: rgba(10, 10, 10, 0.92);
+    border-bottom-color: var(--border);
+  }
+
+  .site-header__inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .site-header__brand {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+  }
+
+  .site-header__brand-mark {
+    color: var(--fg);
+  }
+
+  .site-header__brand:hover .site-header__brand-mark {
+    color: var(--accent);
+  }
+
+  /* Desktop nav */
+  .site-nav {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .site-nav {
+      display: block;
+    }
+  }
+
+  .site-nav__list {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .site-nav__link {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    transition: color 0.2s var(--ease-out-expo);
+    padding-block: 0.25rem;
+    border-bottom: 1px solid transparent;
+  }
+
+  .site-nav__link:hover,
+  .site-nav__link.is-active {
+    color: var(--fg);
+    border-bottom-color: var(--accent);
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .site-header__cta {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .site-header__cta {
+      display: inline-flex;
+      padding: 0.65rem 1.1rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  .site-header__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--fg);
+    cursor: pointer;
+    transition: border-color 0.2s var(--ease-out-expo),
+      background 0.2s var(--ease-out-expo);
+  }
+
+  .site-header__toggle:hover {
+    border-color: var(--border-strong);
+    background: var(--bg-elevated);
+  }
+
+  @media (min-width: 1024px) {
+    .site-header__toggle {
+      display: none;
+    }
+  }
+
+  /* Mobile menu overlay */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(10, 10, 10, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s var(--ease-out-expo);
+  }
+
+  .mobile-menu.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-menu[hidden] {
+    display: none;
+  }
+
+  .mobile-menu__inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-block: 3rem;
+  }
+
+  .mobile-menu__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--fg);
+    cursor: pointer;
+  }
+
+  .mobile-menu__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .mobile-menu__link {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--fg);
+    transition: color 0.2s var(--ease-out-expo);
+  }
+
+  .mobile-menu__link:hover {
+    color: var(--accent);
+  }
+
+  .mobile-menu__cta {
+    align-self: flex-start;
+    padding: 1rem 1.5rem;
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const close = document.querySelector<HTMLButtonElement>('[data-menu-close]');
+  const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+  const menuLinks = document.querySelectorAll<HTMLAnchorElement>('[data-menu-link]');
+
+  // Scroll shadow / opacity on header
+  if (header) {
+    const onScroll = () => {
+      header.classList.toggle('is-scrolled', window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  const openMenu = () => {
+    if (!menu || !toggle) return;
+    menu.hidden = false;
+    // Force reflow so transition runs on first open
+    void menu.offsetWidth;
+    menu.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMenu = () => {
+    if (!menu || !toggle) return;
+    menu.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    // Delay hidden until transition completes
+    window.setTimeout(() => {
+      if (!menu.classList.contains('is-open')) menu.hidden = true;
+    }, 250);
+  };
+
+  toggle?.addEventListener('click', openMenu);
+  close?.addEventListener('click', closeMenu);
+  menuLinks.forEach((l) => l.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu?.classList.contains('is-open')) closeMenu();
+  });
+
+  // Scroll-spy: highlight the currently visible section in the nav
+  const sections = document.querySelectorAll<HTMLElement>('section[id]');
+  const navLinksActive = document.querySelectorAll<HTMLAnchorElement>('.site-nav__link');
+  if (sections.length && navLinksActive.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const id = e.target.getAttribute('id');
+          navLinksActive.forEach((l) =>
+            l.classList.toggle('is-active', l.getAttribute('href') === `#${id}`),
+          );
+        }
+      },
+      { rootMargin: '-40% 0px -55% 0px', threshold: 0 },
+    );
+    sections.forEach((s) => io.observe(s));
+  }
+</script>

@@ -1,0 +1,82 @@
+---
+import Icon from './Icon.astro';
+import Placeholder from './Placeholder.astro';
+
+// A 6-tile masonry-ish grid. The first + last tiles span wider on desktop.
+const tiles: { aspect: '16/9' | '4/3' | '3/4' | '1/1'; label: string; span?: boolean }[] = [
+  { aspect: '4/3', label: 'Festival main stage',    span: true },
+  { aspect: '4/3', label: 'Club night' },
+  { aspect: '4/3', label: 'MC on the mic' },
+  { aspect: '4/3', label: 'Crowd hands up' },
+  { aspect: '4/3', label: 'Backstage moment' },
+  { aspect: '4/3', label: 'Confetti drop',          span: true },
+];
+---
+
+<section id="gallery" class="gallery section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Gallery</span>
+      <h2 class="section-title">On stage.</h2>
+    </div>
+
+    <ul class="gallery__grid reveal">
+      {tiles.map((t) => (
+        <li class:list={['gallery__tile', t.span && 'gallery__tile--wide']}>
+          <Placeholder aspect={t.aspect} label={t.label} />
+        </li>
+      ))}
+    </ul>
+
+    <div class="gallery__cta reveal">
+      <a href="#" class="btn btn--outline">
+        View Full Gallery
+        <Icon name="arrow-right" size={16} class="btn__icon" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .gallery__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .gallery__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .gallery__tile--wide {
+      grid-column: span 2;
+    }
+  }
+
+  .gallery__tile {
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    transition: border-color 0.25s var(--ease-out-expo),
+      transform 0.25s var(--ease-out-expo);
+  }
+
+  .gallery__tile:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .gallery__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+</style>

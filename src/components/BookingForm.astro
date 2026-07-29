@@ -1,0 +1,221 @@
+---
+import Icon from './Icon.astro';
+import Placeholder from './Placeholder.astro';
+
+const eventTypes = [
+  'Festival',
+  'Club Night',
+  'Corporate Event',
+  'Wedding',
+  'Private Party',
+  'Other',
+];
+
+const budgetRanges = [
+  'Under €1,000',
+  '€1,000 – €2,500',
+  '€2,500 – €5,000',
+  '€5,000 – €10,000',
+  '€10,000+',
+];
+---
+
+<section id="contact" class="booking section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Book FJR</span>
+      <h2 class="section-title">Get in touch.</h2>
+      <p class="section-lead">
+        Tell us about your event and we'll get back within 48 hours with
+        availability and pricing.
+      </p>
+    </div>
+
+    <div class="booking__inner">
+      <form
+        class="booking__form reveal"
+        name="booking"
+        method="POST"
+        action="/thanks"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+      >
+        {/* Netlify needs these hidden fields to identify the form. */}
+        <input type="hidden" name="form-name" value="booking" />
+        <p class="booking__honeypot">
+          <label>
+            Don't fill this out if you're human: <input name="bot-field" />
+          </label>
+        </p>
+
+        <div class="booking__row">
+          <label class="booking__field">
+            <span class="booking__label">Name *</span>
+            <input type="text" name="name" required autocomplete="name" placeholder="Your full name" />
+          </label>
+          <label class="booking__field">
+            <span class="booking__label">Email *</span>
+            <input type="email" name="email" required autocomplete="email" placeholder="you@email.com" />
+          </label>
+        </div>
+
+        <div class="booking__row">
+          <label class="booking__field">
+            <span class="booking__label">Event Date</span>
+            <input type="date" name="event-date" />
+          </label>
+          <label class="booking__field">
+            <span class="booking__label">Location</span>
+            <input type="text" name="location" placeholder="City, Country" />
+          </label>
+        </div>
+
+        <div class="booking__row">
+          <label class="booking__field">
+            <span class="booking__label">Type of Event</span>
+            <select name="event-type" required>
+              <option value="">Select…</option>
+              {eventTypes.map((t) => <option value={t}>{t}</option>)}
+            </select>
+          </label>
+          <label class="booking__field">
+            <span class="booking__label">Budget Range</span>
+            <select name="budget">
+              <option value="">Select…</option>
+              {budgetRanges.map((b) => <option value={b}>{b}</option>)}
+            </select>
+          </label>
+        </div>
+
+        <label class="booking__field">
+          <span class="booking__label">Message</span>
+          <textarea
+            name="message"
+            rows="5"
+            placeholder="Tell us about the event — vibe, crowd size, duration, anything else we should know."
+          ></textarea>
+        </label>
+
+        <button type="submit" class="btn btn--primary booking__submit">
+          Request Booking
+          <Icon name="arrow-right" size={16} class="btn__icon" />
+        </button>
+      </form>
+
+      <div class="booking__media reveal">
+        <Placeholder aspect="3/4" label="Photo — MC on the mic" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .booking__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .booking__inner {
+      grid-template-columns: 1.4fr 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .booking__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .booking__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .booking__row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .booking__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .booking__label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
+  .booking__field input,
+  .booking__field select,
+  .booking__field textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--fg);
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    transition: border-color 0.2s var(--ease-out-expo),
+      background 0.2s var(--ease-out-expo);
+  }
+
+  .booking__field input::placeholder,
+  .booking__field textarea::placeholder {
+    color: var(--fg-dim);
+  }
+
+  .booking__field input:hover,
+  .booking__field select:hover,
+  .booking__field textarea:hover {
+    border-color: var(--border-strong);
+  }
+
+  .booking__field input:focus,
+  .booking__field select:focus,
+  .booking__field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+  }
+
+  .booking__field textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: var(--font-display);
+  }
+
+  .booking__field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a3a3a3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+
+  .booking__submit {
+    align-self: flex-start;
+    margin-top: 0.75rem;
+    padding: 1rem 1.75rem;
+  }
+
+  /* Netlify honeypot — visually hidden but reachable to bots */
+  .booking__honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+</style>

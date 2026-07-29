@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  aspect?: '16/9' | '4/3' | '3/4' | '1/1';
+  label?: string;
+  class?: string;
+}
+
+const { aspect = '4/3', label = 'Photo', class: className = '' } = Astro.props;
+
+const aspectClass = {
+  '16/9': 'aspect-16-9',
+  '4/3': 'aspect-4-3',
+  '3/4': 'aspect-3-4',
+  '1/1': 'aspect-1-1',
+}[aspect];
+---
+
+<div class={`placeholder ${aspectClass} ${className}`} role="img" aria-label={`Placeholder: ${label}`}>
+  <span class="placeholder__label">
+    <Icon name="image" size={12} class="placeholder__icon" />
+    {label}
+  </span>
+</div>

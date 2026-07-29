@@ -1,0 +1,166 @@
+---
+import Icon from './Icon.astro';
+
+const videos = [
+  { title: 'Festival Highlight', duration: '2:14' },
+  { title: 'Club Highlight',     duration: '1:48' },
+  { title: 'Wedding Highlight',  duration: '2:32' },
+  { title: 'Asian Tour Recap',   duration: '3:05' },
+];
+---
+
+<section id="videos" class="videos section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Videos</span>
+      <h2 class="section-title">See it live.</h2>
+    </div>
+
+    <ul class="videos__grid reveal">
+      {videos.map((v) => (
+        <li>
+          <a href="#" class="video-card" aria-label={`Play: ${v.title}`}>
+            <div class="video-card__thumb">
+              <div class="video-card__thumb-bg"></div>
+              <span class="video-card__play" aria-hidden="true">
+                <Icon name="play" size={22} />
+              </span>
+              <span class="video-card__duration">{v.duration}</span>
+            </div>
+            <div class="video-card__body">
+              <h3 class="video-card__title">{v.title}</h3>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="videos__cta reveal">
+      <a href="#" class="btn btn--outline">
+        View More Videos
+        <Icon name="arrow-right" size={16} class="btn__icon" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .videos__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .videos__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .videos__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .video-card {
+    display: block;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.25s var(--ease-out-expo),
+      transform 0.25s var(--ease-out-expo);
+  }
+
+  .video-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .video-card:hover .video-card__play {
+    background: var(--accent);
+    color: #fff;
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+
+  .video-card__thumb {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .video-card__thumb-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(225, 29, 44, 0.25), transparent 55%),
+      radial-gradient(circle at 70% 70%, rgba(225, 29, 44, 0.15), transparent 60%),
+      linear-gradient(135deg, #1a0708 0%, #0a0a0a 100%);
+  }
+
+  .video-card__thumb-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .video-card__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: rgba(10, 10, 10, 0.7);
+    border: 1px solid var(--border-strong);
+    backdrop-filter: blur(6px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fg);
+    padding-left: 3px; /* optically center the triangle */
+    transition: background 0.2s var(--ease-out-expo),
+      color 0.2s var(--ease-out-expo),
+      transform 0.2s var(--ease-out-expo);
+  }
+
+  .video-card__duration {
+    position: absolute;
+    right: 0.6rem;
+    bottom: 0.6rem;
+    padding: 0.15rem 0.5rem;
+    background: rgba(10, 10, 10, 0.75);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--fg);
+    backdrop-filter: blur(4px);
+  }
+
+  .video-card__body {
+    padding: 0.95rem 1.1rem 1.05rem;
+  }
+
+  .video-card__title {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg);
+  }
+
+  .videos__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+</style>
