@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const year = new Date().getFullYear();
+
+const marqueeItems = [
+  'Coming Soon',
+  'MC · DJ',
+  'Amsterdam',
+  'House',
+  'Bookings Open',
+];
+
+// Repeat once so the marquee loop is seamless.
+const marqueeLoop = [...marqueeItems, ...marqueeItems];
+---
+
+<Layout
+  title="MC FJR — Coming Soon"
+  description="MC FJR (Fajar Symons) — Dutch MC & DJ. New site landing soon. Bookings open."
+>
+  <main class="shell">
+    <header class="topbar">
+      <span class="topbar__mark">
+        <span class="topbar__dot" aria-hidden="true"></span>
+        <span>MC FJR</span>
+      </span>
+      <span class="topbar__location">Amsterdam · NL</span>
+    </header>
+
+    <section class="hero">
+      <div class="hero__badge" role="text" aria-label="Coming soon">
+        <span class="hero__badge-dot" aria-hidden="true"></span>
+        <span class="hero__badge-text">Coming Soon</span>
+      </div>
+
+      <h1 class="hero__title">
+        FJR<span aria-hidden="true">.</span>
+      </h1>
+
+      <p class="hero__eyebrow">MC &amp; DJ · Est. 2008</p>
+
+      <p class="hero__tagline">
+        A new home for the crowd&#8209;hyping, rhyming, vocal MC of the Dutch
+        club scene is on the way.
+      </p>
+
+      <p class="hero__bio">
+        Fajar Symons — better known as MC FJR — has been rocking the biggest
+        floors in the Netherlands for well over a decade, from Jimmy Woo to
+        ADE. New site landing soon. Until then, follow along and reach out for
+        bookings.
+      </p>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        {marqueeLoop.map((item) => <span class="marquee__item">{item}</span>)}
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer__group">
+        <span class="footer__label">Bookings</span>
+        <span class="footer__value">
+          <a href="mailto:bookings@mcfjr.com">bookings@mcfjr.com</a>
+        </span>
+      </div>
+
+      <nav class="socials" aria-label="Social media">
+        <a
+          href="https://www.instagram.com/officialfjr"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
+          </svg>
+          Instagram
+        </a>
+      </nav>
+
+      <div class="footer__group">
+        <span class="footer__label">© {year}</span>
+        <span class="copyright">All rights reserved</span>
+      </div>
+    </footer>
+  </main>
+</Layout>
