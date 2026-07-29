@@ -71,11 +71,16 @@ In `src/styles/global.css`:
 
 In `src/pages/index.astro`, find the `mailto:` link.
 
-## Deployment
+## Deployment — Netlify
 
-Static output — deploys to any host. Recommended:
+Config lives in [`netlify.toml`](./netlify.toml): build command, publish directory, pinned Node version, and cache/security headers.
 
-- **Cloudflare Pages**: connect the repo, framework preset "Astro", build command `npm run build`, output `dist`.
-- **Vercel / Netlify**: same setup; both auto-detect Astro.
+To connect:
 
-The `site` field in `astro.config.mjs` is set to `https://mcfjr.com` for canonical URLs — update it to whatever domain will be used.
+1. Netlify dashboard → **Add new site** → **Import an existing project** → GitHub → pick `Ayrthon/officialfjr`.
+2. Netlify will read `netlify.toml` — no manual build settings needed.
+3. Deploy. First build takes ~30–60s.
+
+Every push to `main` will trigger a new deploy automatically.
+
+The `site` field in `astro.config.mjs` is set to `https://mcfjr.com` for canonical URLs — update it once the real domain is picked (Netlify subdomain or custom).
